@@ -1,4 +1,4 @@
-package com.bt.druid.extensions.handlingnull;
+package com.bt.druid.extensions.handlingnull.minagg;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

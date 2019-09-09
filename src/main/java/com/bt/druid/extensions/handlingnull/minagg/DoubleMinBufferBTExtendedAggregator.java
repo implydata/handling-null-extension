@@ -1,5 +1,6 @@
-package com.bt.druid.extensions.handlingnull;
+package com.bt.druid.extensions.handlingnull.minagg;
 
+import com.bt.druid.extensions.handlingnull.SimpleDoubleBufferBTExtendedAggregator;
 import org.apache.druid.segment.BaseDoubleColumnValueSelector;
 
 import java.nio.ByteBuffer;

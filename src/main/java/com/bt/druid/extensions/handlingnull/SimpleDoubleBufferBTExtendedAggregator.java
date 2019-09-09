@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public abstract class SimpleDoubleBufferBTExtendedAggregator implements BufferAggregator {
     final BaseDoubleColumnValueSelector selector;
 
-    SimpleDoubleBufferBTExtendedAggregator(BaseDoubleColumnValueSelector selector)
+    public SimpleDoubleBufferBTExtendedAggregator(BaseDoubleColumnValueSelector selector)
     {
         this.selector = selector;
     }

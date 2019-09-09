@@ -1,6 +1,6 @@
 package com.bt.druid.extensions;
 
-import com.bt.druid.extensions.handlingnull.DoubleMinBTExtendedAggregatorFactory;
+import com.bt.druid.extensions.handlingnull.minagg.DoubleMinBTExtendedAggregatorFactory;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.collect.ImmutableList;

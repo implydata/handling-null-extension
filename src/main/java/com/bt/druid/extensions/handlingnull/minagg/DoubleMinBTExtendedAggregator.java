@@ -1,4 +1,4 @@
-package com.bt.druid.extensions.handlingnull;
+package com.bt.druid.extensions.handlingnull.minagg;
 
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Doubles;

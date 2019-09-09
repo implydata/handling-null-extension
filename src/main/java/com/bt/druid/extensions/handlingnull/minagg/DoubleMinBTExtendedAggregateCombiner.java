@@ -1,4 +1,4 @@
-package com.bt.druid.extensions.handlingnull;
+package com.bt.druid.extensions.handlingnull.minagg;
 
 import org.apache.druid.query.aggregation.DoubleAggregateCombiner;
 import org.apache.druid.segment.ColumnValueSelector;
