@@ -58,26 +58,29 @@ public class DoubleMinBTExtendedAggregator implements Aggregator {
     }
 
     @Override
-    public Object get()
-    {
-        return min;
+    public Object get() {
+        return getValue();
     }
 
     @Override
-    public float getFloat()
-    {
-        return (float) min;
+    public float getFloat() {
+        return (float) getValue();
     }
 
     @Override
-    public long getLong()
-    {
-        return (long) min;
+    public long getLong() {
+        return (long) getValue();
     }
 
     @Override
-    public double getDouble()
-    {
+    public double getDouble() {
+        return (double) getValue();
+    }
+
+    private Object getValue() {
+        if(min == Double.POSITIVE_INFINITY)
+            return (double)Integer.MIN_VALUE;
+
         return min;
     }
 

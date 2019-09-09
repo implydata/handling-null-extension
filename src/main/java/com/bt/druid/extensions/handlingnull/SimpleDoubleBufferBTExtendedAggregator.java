@@ -40,25 +40,34 @@ public abstract class SimpleDoubleBufferBTExtendedAggregator implements BufferAg
     @Override
     public final Object get(ByteBuffer buf, int position)
     {
-        return buf.getDouble(position);
+        return getValue(buf, position);
     }
 
     @Override
     public final float getFloat(ByteBuffer buf, int position)
     {
-        return (float) buf.getDouble(position);
+        return (float) getValue(buf, position);
     }
 
     @Override
     public final long getLong(ByteBuffer buf, int position)
     {
-        return (long) buf.getDouble(position);
+        return (long) getValue(buf, position);
     }
 
     @Override
     public double getDouble(ByteBuffer buffer, int position)
     {
-        return buffer.getDouble(position);
+        return (double) getValue(buffer, position);
+    }
+
+    private Object getValue(ByteBuffer buf, int position) {
+        double value = buf.getDouble(position);
+
+        if(value == Double.POSITIVE_INFINITY)
+            return (double)Integer.MIN_VALUE;
+
+        return value;
     }
 
     @Override
