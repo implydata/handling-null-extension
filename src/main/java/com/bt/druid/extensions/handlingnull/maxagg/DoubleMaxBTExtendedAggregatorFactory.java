@@ -1,4 +1,4 @@
-package com.bt.druid.extensions.handlingnull.minagg;
+package com.bt.druid.extensions.handlingnull.maxagg;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,14 +13,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class DoubleMinBTExtendedAggregatorFactory extends AggregatorFactory {
+public class DoubleMaxBTExtendedAggregatorFactory extends AggregatorFactory {
 
-    public static final String TYPE_NAME = "doubleMinExtended";
+    public static final String TYPE_NAME = "doubleMaxExtended";
     private final String name;
     private final String fieldName;
 
     @JsonCreator
-    public DoubleMinBTExtendedAggregatorFactory(@JsonProperty("name") String name,
+    public DoubleMaxBTExtendedAggregatorFactory(@JsonProperty("name") String name,
                                                 @JsonProperty("fieldName") final String fieldName) {
         Preconditions.checkNotNull(name, "Must have a valid, non-null aggregator name");
         Preconditions.checkNotNull(fieldName, "Must have a valid, non-null fieldName");
@@ -30,17 +30,17 @@ public class DoubleMinBTExtendedAggregatorFactory extends AggregatorFactory {
 
     @Override
     public Aggregator factorize(ColumnSelectorFactory columnSelectorFactory) {
-        return new DoubleMinBTExtendedAggregator(columnSelectorFactory.makeColumnValueSelector(fieldName));
+        return new DoubleMaxBTExtendedAggregator(columnSelectorFactory.makeColumnValueSelector(fieldName));
     }
 
     @Override
     public BufferAggregator factorizeBuffered(ColumnSelectorFactory columnSelectorFactory) {
-        return new DoubleMinBufferBTExtendedAggregator(columnSelectorFactory.makeColumnValueSelector(fieldName));
+        return new DoubleMaxBufferBTExtendedAggregator(columnSelectorFactory.makeColumnValueSelector(fieldName));
     }
 
     @Override
     public Comparator getComparator() {
-        return DoubleMinBTExtendedAggregator.COMPARATOR;
+        return DoubleMaxBTExtendedAggregator.COMPARATOR;
     }
 
     @Nullable
@@ -52,22 +52,22 @@ public class DoubleMinBTExtendedAggregatorFactory extends AggregatorFactory {
         if (lhs == null) {
             return rhs;
         }
-        return DoubleMinBTExtendedAggregator.combineValues(lhs, rhs);
+        return DoubleMaxBTExtendedAggregator.combineValues(lhs, rhs);
     }
 
     @Override
     public AggregatorFactory getCombiningFactory() {
-        return new DoubleMinBTExtendedAggregatorFactory(name, name);
+        return new DoubleMaxBTExtendedAggregatorFactory(name, name);
     }
 
     @Override
     public AggregateCombiner makeAggregateCombiner() {
-        return new DoubleMinBTExtendedAggregateCombiner();
+        return new DoubleMaxBTExtendedAggregateCombiner();
     }
 
     @Override
     public List<AggregatorFactory> getRequiredColumns() {
-        return Collections.singletonList(new DoubleMinBTExtendedAggregatorFactory(fieldName, fieldName));
+        return Collections.singletonList(new DoubleMaxBTExtendedAggregatorFactory(fieldName, fieldName));
     }
 
     @Override
@@ -116,10 +116,11 @@ public class DoubleMinBTExtendedAggregatorFactory extends AggregatorFactory {
         byte[] nameBytes = StringUtils.toUtf8WithNullToEmpty(name);
 
         return ByteBuffer.allocate(3 + fieldNameBytes.length + nameBytes.length)
-                .put(AggregatorUtil.DOUBLE_MIN_CACHE_TYPE_ID)
+                .put(AggregatorUtil.DOUBLE_MAX_CACHE_TYPE_ID)
                 .put(fieldNameBytes)
                 .put(AggregatorUtil.STRING_SEPARATOR)
                 .put(nameBytes)
                 .array();
     }
+
 }

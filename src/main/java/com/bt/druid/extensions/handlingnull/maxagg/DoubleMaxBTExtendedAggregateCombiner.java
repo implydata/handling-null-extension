@@ -1,16 +1,17 @@
-package com.bt.druid.extensions.handlingnull.minagg;
+package com.bt.druid.extensions.handlingnull.maxagg;
 
 import org.apache.druid.query.aggregation.DoubleAggregateCombiner;
 import org.apache.druid.segment.ColumnValueSelector;
 
-final class DoubleMinBTExtendedAggregateCombiner extends DoubleAggregateCombiner {
-    private double min  = Double.POSITIVE_INFINITY;
+public class DoubleMaxBTExtendedAggregateCombiner extends DoubleAggregateCombiner {
+
+    private double max = Double.NEGATIVE_INFINITY;
 
     @Override
     public void reset(ColumnValueSelector selector)
     {
         if(selector.getDouble() != Integer.MIN_VALUE) {
-            min = selector.getDouble();
+            max = selector.getDouble();
         }
     }
 
@@ -18,15 +19,16 @@ final class DoubleMinBTExtendedAggregateCombiner extends DoubleAggregateCombiner
     public void fold(ColumnValueSelector selector)
     {
         if(selector.getDouble() != Integer.MIN_VALUE) {
-            min = Math.min(min, selector.getDouble());
+            max = Math.max(max, selector.getDouble());
         }
     }
 
     @Override
     public double getDouble() {
-        if(min == Double.POSITIVE_INFINITY)
+        if(max == Double.NEGATIVE_INFINITY)
             return (double)Integer.MIN_VALUE;
 
-        return min;
+        return max;
     }
+
 }
