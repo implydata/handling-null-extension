@@ -1,6 +1,7 @@
 package com.bt.druid.extensions;
 
 import com.bt.druid.extensions.handlingnull.minagg.DoubleMinBTExtendedAggregatorFactory;
+import com.bt.druid.extensions.handlingnull.sumagg.DoubleSumBTExtendedAggregatorFactory;
 import com.bt.druid.extensions.handlingnull.maxagg.DoubleMaxBTExtendedAggregatorFactory;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -25,6 +26,10 @@ public class CustomModules implements DruidModule {
                         new NamedType(
                                 DoubleMaxBTExtendedAggregatorFactory.class,
                                 DoubleMaxBTExtendedAggregatorFactory.TYPE_NAME
+                        ),
+                        new NamedType(
+                                DoubleSumBTExtendedAggregatorFactory.class,
+                                DoubleSumBTExtendedAggregatorFactory.TYPE_NAME
                         )
                 )
         );
